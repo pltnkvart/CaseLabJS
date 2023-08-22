@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDoList</title>
+    <title>Todo List</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+    <div class="todo-container">
+        <h1>Todo List</h1>
+        <div class="button-container">
+            <button class="btn-primary" onclick="highlightEven()">Выделить четные</button>
+            <button class="btn-primary" onclick="highlightOdd()">Выделить нечетные</button>
+            <button class="btn-primary" onclick="deleteFirst()">Удалить первый</button>
+            <button class="btn-primary" onclick="deleteLast()">Удалить последний</button>
+        </div>
+        <ul id="todo-list">
+        </ul>
+        <input type="text" id="new-task" placeholder="Добавить новую задачу">
+        <button class="btn-primary" onclick="addTask()">Добавить</button>
+    </div>
+    <script src="index.js"></script>
 </body>
+
 </html>
