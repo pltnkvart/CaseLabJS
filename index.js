@@ -34,7 +34,10 @@ function addTask() {
 }
 
 function completeTask(index) {
-
+    tasks[index].completed = true;
+    const completedTask = tasks.splice(index, 1)[0];
+    tasks.push(completedTask);
+    updateList();
 }
 
 function deleteTask(index) {
