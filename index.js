@@ -4,10 +4,32 @@ function updateList() {
     const todoList = document.getElementById('todo-list');
     todoList.innerHTML = '';
 
-    tasks.forEach((task, index) => {
-        const li = document.createElement('li');
-        li.className = task.completed ? 'todo-item completed' : 'todo-item';
-        li.innerHTML = `
+    const completedTasks = tasks.filter(task => task.completed);
+    const incompleteTasks = tasks.filter(task => !task.completed);
+
+
+    incompleteTasks.forEach((task, index) => {
+        const li = createTaskElement(task, index);
+        todoList.appendChild(li);
+    });
+
+    if (completedTasks.length > 0 && incompleteTasks.length > 0) {
+        const hr = document.createElement('hr');
+        todoList.appendChild(hr);
+    }
+
+    completedTasks.forEach(task => {
+        const li = createTaskElement(task);
+        todoList.appendChild(li);
+    });
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function createTaskElement(task, index) {
+    const li = document.createElement('li');
+    li.className = task.completed ? 'todo-item completed' : 'todo-item';
+    li.innerHTML = `
                     <span>${task.text}</span>
                     <button class="btn-primary" onclick="completeTask(${index})">Complete</button>
                     <button class="image-button" onclick="deleteTask(${index})"><svg xmlns="http://www.w3.org/2000/svg"
@@ -18,10 +40,7 @@ function updateList() {
                         </svg>
                     </button>
                 `;
-        todoList.appendChild(li);
-    });
-
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    return li;
 }
 
 function addTask() {
@@ -46,14 +65,14 @@ function deleteTask(index) {
 }
 
 function highlightEven() {
-    const todoItems = document.querySelectorAll('.todo-item');
+    const todoItems = document.querySelectorAll('.todo-item:not(.completed)');
     todoItems.forEach((item, index) => {
         item.style.backgroundColor = index % 2 !== 0 ? '#f3f6fd' : '#fff';
     });
 }
 
 function highlightOdd() {
-    const todoItems = document.querySelectorAll('.todo-item');
+    const todoItems = document.querySelectorAll('.todo-item:not(.completed)');
     todoItems.forEach((item, index) => {
         item.style.backgroundColor = index % 2 == 0 ? '#f3f6fd' : '#fff';
     });
