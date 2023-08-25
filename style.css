@@ -99,3 +99,7 @@ hr {
     border: none;
     cursor: pointer;
 }
+
+.completed-btn{
+    background-color: #ccc;
+}

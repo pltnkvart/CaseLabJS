@@ -31,7 +31,7 @@ function createTaskElement(task, index, isCompleted) {
     li.innerHTML = `
         <span>${task.text}</span>
         <button class="btn-primary" onclick="completeTask(${index})">Complete</button>
-        <button class="image-button" onclick="deleteTask(${index}, ${isCompleted})">
+        <button class="image-button ${task.completed ? 'completed-btn' : ''}" onclick="deleteTask(${index}, ${isCompleted})">
             <svg xmlns="http://www.w3.org/2000/svg"
                 x="0px" y="0px" width="30" height="30" margin-top="5px" viewBox="0 0 24 24">
                 <path
@@ -40,6 +40,7 @@ function createTaskElement(task, index, isCompleted) {
             </svg>
         </button>
     `;
+    
     return li;
 }
 
